@@ -1,0 +1,57 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+#include <math.h>
+float func(double x,int d,int a[],int deg[])
+{
+    float v=0;
+    for(int i=0;i<=d;i++)
+    {
+       v=v+ (a[i]*pow(x,deg[i]));
+    }
+    return v;
+}
+float derv(double x,int d,int a[],int deg[])
+{
+    int v=0;
+    for(int i=1;i<=d;i++)
+    {
+    
+       v=v+ (a[i]*deg[i]*pow(x,deg[i]-1));
+    }
+    return v;
+}
+void newton(float x,int d,int a[],int deg[])
+{
+    float h = func(x,d,a,deg)/derv(x,d,a,deg);
+    for (int i=1;i<=20;i++)
+    {
+        x=x-h;
+        h = func(x,d,a,deg)/derv(x,d,a,deg);
+        printf("Value at %d th iteration is %f \n",i,x);
+    }
+    printf("Value  of x : %f \n",x);
+}
+
+int main()
+{
+    int d;
+    float x;
+    printf(" Max degree in equation and value of x : ");
+    scanf("%d %f",&d,&x);
+    int deg[d+1],exp[d+1];
+   
+    for (int i =0;i<=d;i++)
+    {
+        printf("Enter exponent of x at degree %d \n",i);
+        deg[i]=i;
+        scanf("%d",&exp[i]);
+    }
+    newton(x,d,exp,deg);
+}
